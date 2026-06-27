@@ -27,6 +27,9 @@ export default function Applications({ onOpenAddModal, onOpenViewModal, onOpenEd
     const [sortBy, setSortBy] = useState('newest'); // newest, oldest, company, position
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
+    // Find your tabs array or filtering state row and add 'Archived':
+    const tabs = ['All', 'Active', 'Offers', 'Rejected', 'Archived'];
+    const [activeTab, setActiveTab] = useState('Active'); // Default to Active to keep layout clean!
 
     // --- Filter & Sort Pipeline Logical Processing ---
     const filteredAndSortedApplications = useMemo(() => {

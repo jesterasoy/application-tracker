@@ -25,19 +25,19 @@ export default function Layout({ children, currentView, setView }) {
                         <nav className="flex items-center gap-1 mr-2">
                             <button
                                 onClick={() => setView('dashboard')}
-                                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'dashboard' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
+                                className={`cursor-pointer px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'dashboard' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
                             >
                                 Dashboard
                             </button>
                             <button
                                 onClick={() => setView('applications')}
-                                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'applications' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
+                                className={`cursor-pointer px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'applications' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
                             >
                                 Applications
                             </button>
                             <button
                                 onClick={() => setView('calendar')}
-                                className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'calendar' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
+                                className={`cursor-pointer px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${currentView === 'calendar' ? 'bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400' : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}`}
                             >
                                 Calendar
                             </button>
@@ -49,7 +49,7 @@ export default function Layout({ children, currentView, setView }) {
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle structural interface theme"
-                            className="p-2 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-all shadow-sm"
+                            className="cursor-pointer p-2 border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-all shadow-sm"
                         >
                             {theme === 'dark' ? <Sun size={16} className="text-amber-400" /> : <Moon size={16} />}
                         </button>

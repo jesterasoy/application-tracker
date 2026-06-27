@@ -49,7 +49,7 @@ export default function Dashboard({ setView, onOpenAddModal }) {
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight">Welcome to Your Career Dashboard</h1>
                     <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-                        You currently have <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{totalApps} active pipelines</span> ongoing.
+                        You currently have <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{totalApps} active Applications</span> ongoing.
                     </p>
                 </div>
                 <div className="flex gap-3">
@@ -104,9 +104,39 @@ export default function Dashboard({ setView, onOpenAddModal }) {
                 <div className="lg:col-span-2 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
                     <div className="flex justify-between items-center mb-4">
                         <h2 className="font-bold text-base tracking-tight">Recent Applications</h2>
-                        <button onClick={() => setView('applications')} className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-1 hover:underline">
+                        <button onClick={() => setView('applications')} className="cursor-pointer text-xs font-semibold text-indigo-600 dark:text-indigo-400 flex items-center gap-1 hover:underline">
                             All records <ArrowUpRight size={14} />
                         </button>
+                    </div>
+                    <div>
+                        {recentApps.length > 0 ? (
+                            <div className="p-3 bg-slate-50 dark:bg-slate-800 rounded-lg border border-slate-200/80 dark:border-slate-700">
+                                <h3 className="font-semibold text-sm">
+                                    {recentApps[0].position} at {recentApps[0].companyName}
+                                </h3>
+                                <p className="text-xs text-slate-400 mt-1 mb-2">
+                                    Applied on {format(parseISO(recentApps[0].applicationDate), 'MMM dd, yyyy')}
+                                </p>
+                                <div
+                                    className={`text-xs py-1 px-2 rounded-full w-fit ${['Pending', 'Assessment', 'HR Screening'].includes(recentApps[0].status)
+                                        ? 'border border-amber-400 text-amber-600 bg-amber-100 dark:bg-transparent dark:text-amber-400 dark:border-amber-900/40'
+                                        : ['Technical Interview', 'Manager Interview', 'Final Interview'].includes(recentApps[0].status)
+                                            ? 'border border-indigo-400 text-indigo-600 bg-indigo-100 dark:bg-transparent dark:text-indigo-400 dark:border-indigo-900/40'
+                                            : ['Offer Received', 'Accepted'].includes(recentApps[0].status)
+                                                ? 'border border-emerald-400 text-emerald-600 bg-emerald-100 dark:bg-transparent dark:text-emerald-400 dark:border-emerald-900/40'
+                                                : recentApps[0].status === 'Rejected'
+                                                    ? 'border border-red-600 text-red-600 bg-red-100 dark:bg-transparent dark:text-red-400 dark:border-red-900/40'
+                                                    : ''
+                                        }`}
+                                >
+                                    {recentApps[0].status}
+                                </div>
+                            </div>
+                        ) : (
+                            <p className="text-sm text-slate-400">
+                                No recent applications found.
+                            </p>
+                        )}
                     </div>
                     {/* Recent lists structure mapping logic stays securely identical to before */}
                 </div>

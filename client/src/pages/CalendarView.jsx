@@ -34,28 +34,19 @@ export default function CalendarView({ onOpenViewModal }) {
     }, [daysInMonth]);
 
     // --- Aggregate Calendar Events from Job Data ---
+    // Find the eventsMap definition inside src/pages/CalendarView.jsx and rewrite it:
     const eventsMap = useMemo(() => {
         const map = [];
 
         applications.forEach(app => {
-            // 1. Capture Interview Dates
-            if (app.nextInterviewDate) {
+            // Capture the Specific Dedicated Interview Date Field
+            if (app.interviewDate) {
                 map.push({
-                    id: `${app.id}-int`,
+                    id: `${app.id}-interview-round`,
                     appData: app,
-                    date: new Date(app.nextInterviewDate),
+                    date: new Date(app.interviewDate),
                     title: `Interview: ${app.companyName}`,
                     type: 'interview'
-                });
-            }
-            // 2. Capture Application Submission Deadlines / Record Markers
-            if (app.applicationDate) {
-                map.push({
-                    id: `${app.id}-app`,
-                    appData: app,
-                    date: new Date(app.applicationDate),
-                    title: `Applied: ${app.companyName}`,
-                    type: 'submission'
                 });
             }
         });
@@ -83,14 +74,14 @@ export default function CalendarView({ onOpenViewModal }) {
                 </div>
 
                 <div className="flex items-center justify-between sm:justify-start gap-4">
-                    <h2 className="text-sm font-bold tracking-tight uppercase text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 rounded-xl">
+                    <h2 className="text-sm font-bold tracking-tight text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1.5 rounded-xl">
                         {format(currentMonth, 'MMMM yyyy')}
                     </h2>
                     <div className="flex gap-1">
-                        <button onClick={prevMonth} className="p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
+                        <button onClick={prevMonth} className="cursor-pointer p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
                             <ChevronLeft size={16} />
                         </button>
-                        <button onClick={nextMonth} className="p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
+                        <button onClick={nextMonth} className="cursor-pointer p-2 border border-slate-200 dark:border-slate-700 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-500">
                             <ChevronRight size={16} />
                         </button>
                     </div>
@@ -142,7 +133,7 @@ export default function CalendarView({ onOpenViewModal }) {
                                                 }`}
                                         >
                                             {evt.type === 'interview' ? <Video size={10} className="flex-shrink-0" /> : <FileText size={10} className="flex-shrink-0" />}
-                                            <span className="truncate">{evt.appData.companyName}</span>
+                                            <span className="truncate cursor-pointer">{evt.appData.companyName}</span>
                                         </button>
                                     ))}
                                 </div>

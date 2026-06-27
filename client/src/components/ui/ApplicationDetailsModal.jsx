@@ -66,7 +66,7 @@ export default function ApplicationDetailsModal({ isOpen, onClose, application }
 
     return (
         <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto animate-fadeIn">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-3xl my-8 shadow-xl relative max-h-[90vh] flex flex-col text-sm">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-4xl my-8 shadow-xl relative max-h-[90vh] flex flex-col text-sm">
 
                 {/* Sticky Header Section */}
                 <div className="flex justify-between items-start p-6 border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/20 rounded-t-2xl">

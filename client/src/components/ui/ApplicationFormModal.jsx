@@ -16,6 +16,7 @@ export const applicationSchema = z.object({
     position: z.string().min(1, 'Position is required'),
     companyName: z.string().min(1, 'Company name is required'),
     applicationDate: z.string().min(1, 'Application Date is required'),
+    interviewDate: z.string().optional().nullable().or(z.literal('')), // Add this line
     status: z.string().default('Pending'),
     jobType: z.string().default('Full-time'),
     workSetup: z.string().default('Remote'),
@@ -91,7 +92,7 @@ export default function ApplicationFormModal({ isOpen, onClose, onSubmit, editin
 
     return (
         <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto animate-fadeIn">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl my-8 p-6 shadow-xl relative max-h-[90vh] flex flex-col">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-3xl my-8 p-6 shadow-xl relative max-h-[90vh] flex flex-col">
 
                 {/* Header */}
                 <div className="flex justify-between items-center pb-4 border-b border-slate-100 dark:border-slate-800">
@@ -150,20 +151,45 @@ export default function ApplicationFormModal({ isOpen, onClose, onSubmit, editin
                         </div>
                     </div>
 
+                    {/* --- UPDATED DATE INPUT ROW GRIDS --- */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">Application Date *</label>
-                            <input {...register('applicationDate')} type="date" className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
+                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">
+                                Date Applied *
+                            </label>
+                            <input
+                                {...register('applicationDate')}
+                                type="date"
+                                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl"
+                            />
+                            {errors.applicationDate && <p className="text-rose-500 text-xs mt-0.5">{errors.applicationDate.message}</p>}
+                        </div>
+
+                        <div>
+                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide border-amber-200/60 dark:border-amber-900/40">
+                                Date of Interview
+                            </label>
+                            <input
+                                {...register('interviewDate')}
+                                type="date"
+                                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl border-amber-200/60 dark:border-amber-900/40"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">
+                                Salary Range
+                            </label>
+                            <input
+                                {...register('salaryRange')}
+                                placeholder="e.g. $100k - $125k"
+                                type="text"
+                                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl"
+                            />
                         </div>
                         <div>
                             <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">Salary Range</label>
                             <input {...register('salaryRange')} placeholder="e.g. ₱50k - ₱125k" type="text" className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
-                        </div>
-                        <div>
-                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">Source</label>
-                            <select {...register('applicationSource')} className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl">
-                                {['LinkedIn', 'Indeed', 'JobStreet', 'Referral', 'Company Website', 'Other'].map(src => <option key={src} value={src}>{src}</option>)}
-                            </select>
                         </div>
                     </div>
 
@@ -188,9 +214,9 @@ export default function ApplicationFormModal({ isOpen, onClose, onSubmit, editin
                             </label>
                             <textarea
                                 {...register('jobDescription')}
-                                rows={2}
+                                rows={10}
                                 placeholder="Paste job descriptions or core requirements..."
-                                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm rounded-xl resize-none"
+                                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm rounded-xl "
                             />
                         </div>
 
