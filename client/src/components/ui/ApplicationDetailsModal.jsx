@@ -46,6 +46,24 @@ export default function ApplicationDetailsModal({ isOpen, onClose, application }
         }
     };
 
+    const viewFileInNewTab = (fileObj) => {
+        if (!fileObj || !fileObj.data) return;
+
+        // Create a temporary window or tab
+        const newTab = window.open();
+
+        if (fileObj.type === 'application/pdf') {
+            // For PDFs, we can inject an iframe or embed tag so it renders nicely
+            newTab.document.write(
+                `<iframe src="${fileObj.data}" width="100%" height="100%" style="border:none;"></iframe>`
+            );
+            newTab.document.title = fileObj.name;
+        } else {
+            // Fallback for images or raw content strings
+            newTab.location.href = fileObj.data;
+        }
+    };
+
     return (
         <div className="fixed inset-0 bg-slate-950/40 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto animate-fadeIn">
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-3xl my-8 shadow-xl relative max-h-[90vh] flex flex-col text-sm">
@@ -139,14 +157,48 @@ export default function ApplicationDetailsModal({ isOpen, onClose, application }
                                 </div>
                             )}
 
-                            {/* Assets tracker cards */}
-                            <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-2">
+                            {/* --- FILE VIEWING CARD UPGRADE --- */}
+                            <div className="p-4 bg-slate-50 dark:bg-slate-800/40 rounded-xl border border-slate-100 dark:border-slate-800 space-y-3">
                                 <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-1 flex items-center gap-1.5">
-                                    <FileText size={14} /> Application Assets
+                                    <FileText size={14} /> Attached Documents
                                 </h4>
-                                <div className="text-xs text-slate-500 dark:text-slate-400">
-                                    <div>Resume: <span className="font-semibold text-slate-700 dark:text-slate-300">{application.resumeVersion || 'Default'}</span></div>
-                                    {application.coverLetterVersion && <div className="mt-1">Cover Letter: <span className="font-semibold text-slate-700 dark:text-slate-300">{application.coverLetterVersion}</span></div>}
+
+                                <div className="space-y-2">
+                                    {/* --- RESUME RENDER BLOCK --- */}
+                                    {application.resumeVersion && application.resumeVersion.data ? (
+                                        <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs shadow-sm">
+                                            <span className="font-semibold text-slate-700 dark:text-slate-300 truncate max-w-[70%]">
+                                                📄 {application.resumeVersion.name}
+                                            </span>
+                                            <button
+                                                type="button"
+                                                onClick={() => viewFileInNewTab(application.resumeVersion)}
+                                                className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline ml-2"
+                                            >
+                                                View File
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="text-xs text-slate-400 italic">No Resume uploaded</div>
+                                    )}
+
+                                    {/* --- COVER LETTER RENDER BLOCK --- */}
+                                    {application.coverLetterVersion && application.coverLetterVersion.data ? (
+                                        <div className="flex items-center justify-between p-2 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs shadow-sm">
+                                            <span className="font-semibold text-slate-700 dark:text-slate-300 truncate max-w-[70%]">
+                                                📄 {application.coverLetterVersion.name}
+                                            </span>
+                                            <button
+                                                type="button"
+                                                onClick={() => viewFileInNewTab(application.coverLetterVersion)}
+                                                className="text-indigo-600 dark:text-indigo-400 font-bold hover:underline ml-2"
+                                            >
+                                                View File
+                                            </button>
+                                        </div>
+                                    ) : (
+                                        <div className="text-xs text-slate-400 italic mt-1">No Cover Letter uploaded</div>
+                                    )}
                                 </div>
                             </div>
 

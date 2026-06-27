@@ -17,7 +17,7 @@ export default function Layout({ children, currentView, setView }) {
                         <div className="p-2 bg-indigo-600 rounded-xl text-white shadow-sm shadow-indigo-600/20">
                             <Briefcase size={18} />
                         </div>
-                        <span className="font-bold text-base tracking-tight hidden sm:block">CareerPipeline</span>
+                        <span className="font-bold text-base tracking-tight hidden sm:block">Application Tracker</span>
                     </div>
 
                     {/* Action Row Links & Dark Mode Button Toggle */}

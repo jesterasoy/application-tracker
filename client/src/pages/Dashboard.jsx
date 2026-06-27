@@ -53,7 +53,7 @@ export default function Dashboard({ setView, onOpenAddModal }) {
                     </p>
                 </div>
                 <div className="flex gap-3">
-                    <button onClick={onOpenAddModal} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-xl text-sm shadow-sm transition-all">
+                    <button onClick={onOpenAddModal} className="cursor-pointer flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-xl text-sm shadow-sm transition-all">
                         <Plus size={16} /> Add Application
                     </button>
                 </div>
