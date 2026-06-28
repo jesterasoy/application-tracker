@@ -99,7 +99,7 @@ export default function ApplicationDetailsModal({ isOpen, onClose, application }
                         </div>
                         <div>
                             <span className="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Salary Target</span>
-                            <span className="font-medium flex items-center gap-0.5 mt-0.5 text-emerald-600 dark:text-emerald-400"><DollarSign size={14} /> {application.salaryRange || 'Open'}</span>
+                            <span className="font-medium flex items-center gap-0.5 mt-0.5 text-emerald-600 dark:text-emerald-400">₱ {application.salaryRange || 'Open'}</span>
                         </div>
                         <div>
                             <span className="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide">Date Applied</span>
