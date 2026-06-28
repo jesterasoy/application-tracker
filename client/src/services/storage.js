@@ -5,20 +5,23 @@ const STORAGE_KEY = 'job_tracker_applications';
 
 export const storageAPI = {
   // Read all records
-  getApplications: () => {
-    const data = localStorage.getItem(STORAGE_KEY);
-    if (!data) {
-      localStorage.setItem(STORAGE_KEY);
-      return STORAGE_KEY;
+  getApplications() {
+    try {
+      const data = localStorage.getItem('applications');
+      if (!data) {
+        // Correctly pass BOTH the key and the stringified empty array fallback
+        localStorage.setItem('applications', JSON.stringify([]));
+        return [];
+      }
+      return JSON.parse(data);
+    } catch (error) {
+      console.error("Storage error:", error);
+      return [];
     }
-    return JSON.parse(data);
   },
-
-  // Save/Overwrite entire dataset
-  saveApplications: (applications) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(applications));
+  saveApplications(apps) {
+    localStorage.setItem('applications', JSON.stringify(apps));
   },
-
   // Add a single new record
   createApplication: (newApp) => {
     const apps = storageAPI.getApplications();
