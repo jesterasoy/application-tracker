@@ -182,15 +182,12 @@ export default function ApplicationFormModal({ isOpen, onClose, onSubmit, editin
                             </label>
                             <input
                                 {...register('salaryRange')}
-                                placeholder="e.g. $100k - $125k"
+                                placeholder="e.g. ₱100k - ₱125k"
                                 type="text"
                                 className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl"
                             />
                         </div>
-                        <div>
-                            <label className="block text-xs font-semibold mb-1 text-slate-500 uppercase tracking-wide">Salary Range</label>
-                            <input {...register('salaryRange')} placeholder="e.g. ₱50k - ₱125k" type="text" className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl" />
-                        </div>
+                        
                     </div>
 
                     {/* Section 3: Recruiter Profile Blocks */}
